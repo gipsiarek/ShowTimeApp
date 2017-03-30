@@ -1,0 +1,220 @@
+﻿<UserControl x:Class="TimerApp.View.PlayListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TimerApp.View"
+             xmlns:Converter="clr-namespace:TimerApp.Model.Helper"
+             
+             mc:Ignorable="d" Opacity="0.9"
+             >
+
+    <UserControl.Resources>
+        <Converter:IndexConverter x:Key="IndexConverter" />
+    </UserControl.Resources>
+
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" HorizontalAlignment="Stretch"  Background="LightGreen"  Opacity="1" OpacityMask="#FF5DF03C">
+            <!--Background="#FF58F358"-->
+            <Label Content="LISTA CZASÓW" HorizontalAlignment="Left" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+            <Button HorizontalAlignment="Right" Background="LightGreen" Foreground="White" VerticalAlignment="Center"
+                        Margin="0,2,10,2" BorderThickness="1" BorderBrush="White" Width="200"  FontSize="18"
+                        Command="{Binding AddNewPlayListItemViewCmd}">
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="110">
+                    <TextBlock Text="+" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Dodaj czas" HorizontalAlignment="Right"/>
+                </DockPanel>
+            </Button>
+            <Button HorizontalAlignment="Right" Background="LightGreen" Foreground="White" VerticalAlignment="Center"
+                        Margin="0,2,10,2" BorderThickness="1" BorderBrush="White" Width="200"  FontSize="18"
+                        Command="{Binding UploadConfigCmd}">
+                    <TextBlock Text="Synchronizuj ustawienia" HorizontalAlignment="Center"/>
+            </Button>
+            <StackPanel HorizontalAlignment="Right" Margin="0,2,0,2">
+                <Button Content="Przesuń w górę"  Command="{Binding RowMovementCmd}" CommandParameter="UP" Margin="0,0,5,2"
+                            Background="LightGreen" Foreground="White"  BorderThickness="1" BorderBrush="White" />
+                <Button Content="Przesuń w dół" Command="{Binding RowMovementCmd}" CommandParameter="DOWN" Margin="0,2,5,0"
+                            Background="LightGreen" Foreground="White"  BorderThickness="1" BorderBrush="White" />
+            </StackPanel>
+        </DockPanel>
+        <Grid Grid.Row="1" Opacity="0.8">
+            <DataGrid ItemsSource="{Binding Path=Ds.TimesCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                     
+                      SelectedItem="{Binding Path=SelectedTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" Margin="0" CanUserAddRows="False" CanUserDeleteRows="False"
+                      CanUserSortColumns="False"  GridLinesVisibility="Horizontal"
+                       SelectionMode="Single" SelectionUnit="FullRow" RowHeaderWidth="0" BorderThickness="0"  >
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                   Color="Gray" Opacity="0.4"/>
+                </DataGrid.Resources>
+                <DataGrid.Columns  >
+                    <DataGridTextColumn Header="Lp." IsReadOnly="True" Binding="{Binding RelativeSource={RelativeSource FindAncestor,
+                                            AncestorType={x:Type DataGridRow}}, Converter={StaticResource IndexConverter}}" 
+                                         >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0,0,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Akcja"  IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate >
+                                <Button 
+                                    Command="{Binding Path=DataContext.StartPauseCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                                    CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                     Margin="0"  Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                            Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Foreground" Value="Blue" />
+                                                                <Setter Property="Cursor" Value="Hand" />
+                                                                <Setter Property="Opacity" Value="0.5"/>
+                                                                <!--If we don't tell the background to change on hover, it will remain the same-->
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding State}" Value="Paused">
+                                                    <Setter Property="Background">
+                                                        <Setter.Value>
+                                                            <ImageBrush ImageSource="/TimerApp;component/Image/play.png"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding State}" Value="Stoped">
+                                                    <Setter Property="Background">
+                                                        <Setter.Value>
+                                                            <ImageBrush ImageSource="/TimerApp;component/Image/play.png"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding State}" Value="Started">
+                                                    <Setter Property="Background">
+                                                        <Setter.Value>
+                                                            <ImageBrush ImageSource="/TimerApp;component/Image/pause.png"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Nazwa" Binding="{Binding Path=Name}" IsReadOnly="True" Width="*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0,0,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Czas trwania" IsReadOnly="True" Binding="{Binding Path=DurationDisplay}"  >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0,0,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridCheckBoxColumn Header="Odliczanie do 0" IsReadOnly="True"  Binding="{Binding Path=IsTimerDescending}" >
+                        <DataGridCheckBoxColumn.ElementStyle>
+                            <Style TargetType="CheckBox">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </DataGridCheckBoxColumn.ElementStyle>
+                    </DataGridCheckBoxColumn>
+                    <DataGridCheckBoxColumn Header="Alarm" IsReadOnly="True"  Binding="{Binding Path=ShouldAlertFire}" >
+                        <DataGridCheckBoxColumn.ElementStyle>
+                            <Style TargetType="CheckBox">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </DataGridCheckBoxColumn.ElementStyle>
+                    </DataGridCheckBoxColumn>
+                    <DataGridTextColumn Header="Uwagi" Binding="{Binding Path=Comments}" IsReadOnly="True" Width="*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,0,0,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    Command="{Binding Path=DataContext.StopCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                                    CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                    Margin="0"  Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/TimerApp;component/Image/stop.png" />
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  Command="{Binding Path=DataContext.EditRowCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                                    CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                    Margin="0"  Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/TimerApp;component/Image/edit.png" />
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding Path=DataContext.DeleteRowCmd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                                    CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                    Margin="0"  Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/TimerApp;component/Image/delete.png" />
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Style.Triggers>
+                            <DataTrigger  Binding="{Binding State}" Value="Started">
+                                <Setter Property="Background" Value="Orange"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

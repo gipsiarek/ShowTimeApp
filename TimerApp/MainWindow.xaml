@@ -1,0 +1,96 @@
+﻿<Window x:Class="TimerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimerApp"
+        mc:Ignorable="d" Title="Timer App"
+        xmlns:vm="clr-namespace:TimerApp.ViewModel"
+        xmlns:views="clr-namespace:TimerApp.View"
+        WindowState="Maximized" WindowStartupLocation="CenterOwner"                
+       > 
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:PlayListViewModel}">
+            <views:PlayListView/>
+        </DataTemplate>
+        <DataTemplate  DataType="{x:Type vm:PreviewViewModel}">
+            <views:PreviewView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MessageSenderViewModel}">
+            <views:MessageSenderView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddBaseTimerViewModel}">
+            <views:AddBaseTimerView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PreviewSettingsViewModel}">
+            <views:PreviewSettingsView/>
+        </DataTemplate>
+        <VisualBrush x:Key="bg">
+            <VisualBrush.Visual>
+                <Grid>
+                    <Image Stretch="Fill" Source="Image/mainBg22.jpg"/>
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </Window.Resources>
+    
+    <Grid Background="{StaticResource bg}">
+        <Grid Margin="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="0.4*"/>
+            </Grid.RowDefinitions>
+            <Grid  Grid.RowSpan="2" Grid.Column="0" >
+                <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" 
+                                UseLayoutRounding="True" SnapsToDevicePixels="True"
+                  Content="{Binding Path=PlayListCtr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ContentControl.Effect>
+                        <DropShadowEffect ShadowDepth="4" Direction="330" Color="Black" Opacity="0.5" BlurRadius="8"/>
+                    </ContentControl.Effect>
+                </ContentControl>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0" Margin="10" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <DockPanel HorizontalAlignment="Stretch"  Background="CadetBlue" Grid.Row="0" >
+                    <Label Content="PODGLĄD" HorizontalAlignment="Left" FontSize="20" Foreground="White"/>
+                    <Button HorizontalAlignment="Right" Background="CadetBlue" Foreground="White"
+                        Margin="0,2,10,2" BorderThickness="1" BorderBrush="White" Width="150"  FontSize="18"
+                        Command="{Binding PreviewSettingsViewCmd}">
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="110">
+                            <TextBlock Text="+" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Ustawienia" HorizontalAlignment="Right"/>
+                        </DockPanel>
+                    </Button>
+                </DockPanel>
+                <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" 
+                                UseLayoutRounding="True" SnapsToDevicePixels="True" Grid.Row="1"
+                                Content="{Binding Path=TimerVm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ContentControl.Effect>
+                        <DropShadowEffect ShadowDepth="4" Direction="330" Color="Black" Opacity="0.5" BlurRadius="8"/>
+                    </ContentControl.Effect>
+                </ContentControl>
+                
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" 
+                                UseLayoutRounding="True" SnapsToDevicePixels="True"
+                    Content="{Binding Path=MessageSenderCtr, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                    <ContentControl.Effect>
+                        <DropShadowEffect ShadowDepth="4" Direction="330" Color="Black" Opacity="0.5" BlurRadius="8"/>
+                    </ContentControl.Effect>
+                </ContentControl>
+            </Grid>
+
+
+        </Grid>
+
+    </Grid>
+</Window>

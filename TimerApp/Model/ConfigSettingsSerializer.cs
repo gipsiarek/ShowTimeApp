@@ -63,12 +63,22 @@ namespace TimerApp.Model
 
         public void ReadConfigFile()
         {
-            using (Stream stream = File.Open("ConfigSetings.xml", FileMode.Open))
+            try
             {
-                XmlSerializer bin = new XmlSerializer(typeof(ConfigSettingsSerializer));
-                var tmp = (ConfigSettingsSerializer)bin.Deserialize(stream);
-                PlayList = tmp.PlayList;
-                Settings = tmp.Settings;
+                using (Stream stream = File.Open("ConfigSetings.xml", FileMode.Open))
+                {
+                    XmlSerializer bin = new XmlSerializer(typeof(ConfigSettingsSerializer));
+                    var tmp = (ConfigSettingsSerializer)bin.Deserialize(stream);
+                    PlayList = new ObservableCollection<TimerRow>();
+                    foreach (var item in tmp.PlayList)
+                    {
+                        PlayList.Add(new TimerRow(item.Name, item.Duration, item.Comments, item.IsTimerDescending, item.ShouldAlertFire));
+                    } 
+                    Settings = tmp.Settings;
+                }
+            } catch(Exception ex)
+            {
+
             }
         }
     }

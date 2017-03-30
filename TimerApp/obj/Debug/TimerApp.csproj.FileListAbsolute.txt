@@ -35,3 +35,4 @@ C:\Dev\TimerApp\TimerApp\obj\Debug\View\SettingsWindow.g.cs
 C:\Dev\TimerApp\TimerApp\obj\Debug\View\SettingsWindow.baml
 C:\Dev\TimerApp\TimerApp\obj\Debug\View\AddTimerWindow.g.cs
 C:\Dev\TimerApp\TimerApp\obj\Debug\View\AddTimerWindow.baml
+C:\Dev\TimerApp\TimerApp\bin\Debug\InstallManager.dll

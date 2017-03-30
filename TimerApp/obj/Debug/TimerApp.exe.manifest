@@ -42,6 +42,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InstallManager.dll" size="40960">
+      <assemblyIdentity name="InstallManager" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>wGV7bEd4oW3Fl0M7eAae39N2LmbPbGgrvjp0zk4FzcI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TimerApp.exe" size="1829888">
       <assemblyIdentity name="TimerApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -49,7 +61,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>khZkb06pGZTsAU/56roPLv8oXmX2STjQDRYV/BXGFKw=</dsig:DigestValue>
+        <dsig:DigestValue>v52t0A/aWmRA6oXWdAXK+ZMtEsh5rpowFB0NPawDycc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

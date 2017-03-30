@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Xml.Serialization;
 using TimerApp.Model.Abstract;
 using TimerApp.Model.Helper;
 
@@ -8,11 +9,11 @@ namespace TimerApp.Model
     [Serializable()]
     public class TimerRow : AbstractViewModel
     {
-        ActionEnum state;
+        [XmlIgnore] ActionEnum state;
         string name;
         long duration;
-        long remainingSeconds;
-        long secondsPassed;
+        [XmlIgnore]long remainingSeconds;
+        [XmlIgnore]long secondsPassed;
         string comments;
         bool isTimerDescending;
         bool shouldAlertFire;
@@ -34,6 +35,7 @@ namespace TimerApp.Model
             state = ActionEnum.Stoped;
         }
 
+        [XmlIgnore]
         public ActionEnum State
         {
             get{return state;}
@@ -74,6 +76,7 @@ namespace TimerApp.Model
             }
         }
 
+        [XmlIgnore]
         public long RemainingSeconds
         {
             get{return remainingSeconds;}
@@ -94,6 +97,7 @@ namespace TimerApp.Model
             }
         }
 
+        [XmlIgnore]
         public long SecondsPassed
         {
             get{return secondsPassed;}

@@ -53,7 +53,7 @@
                 <Style TargetType="{x:Type Grid}">
                     <Setter Property="Background" Value="{DynamicResource previewBackground}"/>
                     <Style.Triggers>
-                        <DataTrigger  Binding="{Binding Ds.Timer.IsBackgroundBlinking}" Value="True">
+                        <DataTrigger  Binding="{Binding Ds.Timer.IsBackgroundBlinking, UpdateSourceTrigger=PropertyChanged}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard Name="bgFlash" Storyboard="{StaticResource bgAnimation}" />
                             </DataTrigger.EnterActions>
@@ -61,7 +61,7 @@
                                 <StopStoryboard BeginStoryboardName="bgFlash"/>
                             </DataTrigger.ExitActions>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Ds.Timer.IsBackgroundAlertFile}" Value="True">
+                        <DataTrigger Binding="{Binding Ds.Timer.IsBackgroundAlertFilem, UpdateSourceTrigger=PropertyChanged}" Value="True">
                             <Setter Property="Background" Value="{DynamicResource alertBackground}"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -133,7 +133,7 @@
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Ds.Timer.IsForegroundBlinking}" Value="True">
+                                <DataTrigger Binding="{Binding Ds.Timer.IsForegroundBlinking, UpdateSourceTrigger=PropertyChanged}" Value="True">
                                     <Setter Property="Visibility" Value="Visible" />
                                     <DataTrigger.EnterActions>
                                         <BeginStoryboard Name="fgFlash" Storyboard="{StaticResource flashAnimation}" />

@@ -14,7 +14,7 @@ namespace TimerApp.ViewModel
             this.ds = ds;
             if (ds.TimesCollection == null || ds.TimesCollection.Count == 0)
             {
-               // FillCollection();
+                FillCollection();
             }
         }
         public DataSet Ds => ds;
@@ -33,11 +33,11 @@ namespace TimerApp.ViewModel
 
         private void FillCollection()
         {
-            TimerRow tmp = new TimerRow("Wstęp", 25, "krótko na temat", true, false);
+            TimerRow tmp = new TimerRow("Wstęp", 25, "Przykładowa", true, false);
             ds.TimesCollection.Add(tmp);
-            tmp = new TimerRow("Omówienie tematu", 120, "bla bla bla bla bla");
+            tmp = new TimerRow("Rozwinięcie", 120, "Lista");
             ds.TimesCollection.Add(tmp);
-            tmp = new TimerRow("Pożegnanie", 3601, "pa pa", false);
+            tmp = new TimerRow("Zakończenie", 30, "pa Czasów", false);
             ds.TimesCollection.Add(tmp);
             OnPropertyChanged(() => Ds.TimesCollection);
         }

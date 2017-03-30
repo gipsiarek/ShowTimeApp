@@ -48,6 +48,7 @@ namespace TimerApp.Command
                         var btTmp = (TimerRow)param;
                         if (!ds.TimesCollection.Contains(btTmp))
                             ds.TimesCollection.Add(btTmp);
+                        ds.TimesCollection = new System.Collections.ObjectModel.ObservableCollection<TimerRow>(ds.TimesCollection);
                         ds.CallCloseDialog(true);
                         ds.Css = new ConfigSettingsSerializer(ds.TimesCollection, ds.Settings);
                         ds.Css.SaveConfigFile();

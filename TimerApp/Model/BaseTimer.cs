@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 using TimerApp.Model.Abstract;
 using TimerApp.Model.Helper;
@@ -38,10 +34,12 @@ namespace TimerApp.Model
                     if (timerRow.RemainingSeconds-- == 0)
                         Stop();
                     else
+                    {
                         TimerDisplay = DisplayTime(timerRow.RemainingSeconds);
 
-                    if (!alertStarted)
-                        CheckAndStartAlert(timerRow.RemainingSeconds);
+                        if (!alertStarted)
+                            CheckAndStartAlert(timerRow.RemainingSeconds);
+                    }
                 };
             else
                 timer.Tick += (obj, ea) =>
@@ -49,10 +47,12 @@ namespace TimerApp.Model
                     if (timerRow.SecondsPassed++ == timerRow.RemainingSeconds)
                         Stop();
                     else
+                    {
                         TimerDisplay = DisplayTime(timerRow.SecondsPassed);
 
-                    if (!alertStarted)
-                        CheckAndStartAlert(timerRow.RemainingSeconds- timerRow.SecondsPassed);
+                        if (!alertStarted)
+                            CheckAndStartAlert(timerRow.RemainingSeconds - timerRow.SecondsPassed);
+                    }
                 };
             
         }
@@ -166,12 +166,13 @@ namespace TimerApp.Model
         {
             timer.Stop();
             timer.IsEnabled = false;
+            IsBackgroundAlertFile = IsBackgroundBlinking = IsForegroundBlinking = alertStarted = false;            
             timerRow.State = ActionEnum.Stoped;
             timerRow.RemainingSeconds = timerRow.Duration;
             timerRow.SecondsPassed = 0;
-            IsBackgroundBlinking = IsForegroundBlinking = alertStarted = false;
+
             
-            TimerDisplay = timerRow.IsTimerDescending ? DisplayTime(timerRow.RemainingSeconds) : DisplayTime(0);
+          //  TimerDisplay = timerRow.IsTimerDescending ? DisplayTime(timerRow.RemainingSeconds) : DisplayTime(0);
         }
 
         public bool IsRunning()

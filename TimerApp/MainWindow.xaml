@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimerApp"
-        mc:Ignorable="d" Title="Timer App"
+        mc:Ignorable="d" Title="Show Time App"
         xmlns:vm="clr-namespace:TimerApp.ViewModel"
         xmlns:views="clr-namespace:TimerApp.View"
         WindowState="Maximized" WindowStartupLocation="CenterOwner"                

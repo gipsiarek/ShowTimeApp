@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_416D1314B68049DABAD1073D8CC4E3E4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5AC39EF56D3D4C96A027F2C39FED0A42"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -35,6 +41,12 @@
         {
         "MsmKey" = "8:_9BC799404C358CFA765FEA93B77F19D0"
         "OwnerKey" = "8:_5AC39EF56D3D4C96A027F2C39FED0A42"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C31480D1EE1C4B33AC8C78EBDEBCAE3F"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -124,6 +136,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_416D1314B68049DABAD1073D8CC4E3E4"
+            {
+            "SourcePath" = "8:..\\TimerApp\\Images\\mainBg5.jpg"
+            "TargetName" = "8:mainBg5.jpg"
+            "Tag" = "8:"
+            "Folder" = "8:_E38E637229EE48BBB9AB6B0694E0DE10"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6AE57F5001053DB8FB3A875295158F85"
             {
             "AssemblyRegister" = "3:1"
@@ -217,6 +249,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C31480D1EE1C4B33AC8C78EBDEBCAE3F"
+            {
+            "SourcePath" = "8:..\\TimerApp\\Images\\ShowTIme.ico"
+            "TargetName" = "8:ShowTIme.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_BEF9CA994DB245139E3D5A05E4FE7ACC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -226,7 +278,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_00865985CF984086B5CCD21B9388224D"
             {
             "Name" = "8:#1919"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:ProgramMenuFolder"
@@ -244,12 +296,23 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_E38E637229EE48BBB9AB6B0694E0DE10"
+                    {
+                    "Name" = "8:Images"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_DD92E98DBAC24091A582F550717AD1FA"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_EC4340A3D6B14A9391B8334030466B14"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
@@ -272,9 +335,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:TimerApp"
+        "ProductName" = "8:ShowTimeApp"
         "ProductCode" = "8:{8E364E78-6286-4A29-94C6-C03F676D5C32}"
-        "PackageCode" = "8:{153FE51B-360B-4A04-9D03-5F9E82A01B9D}"
+        "PackageCode" = "8:{93B719F5-ECA7-4FB5-ADED-B0C78B952BA5}"
         "UpgradeCode" = "8:{AB70C535-3DE3-4AFB-A794-7568F7B5A2F9}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -285,13 +348,13 @@
         "Manufacturer" = "8:gipsiarek CO"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:TimerApp"
+        "Title" = "8:ShowTimeApp"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Arek Maltański"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_C31480D1EE1C4B33AC8C78EBDEBCAE3F"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -394,6 +457,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_44C11F8FEDF04A5B9B940E5CBD8EC90A"
+            {
+            "Name" = "8:Show Time App"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_EC4340A3D6B14A9391B8334030466B14"
+            "Folder" = "8:_EC4340A3D6B14A9391B8334030466B14"
+            "WorkingFolder" = "8:_EC4340A3D6B14A9391B8334030466B14"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D740EC33B2D24BBAA9615C598F660654"
+            {
+            "Name" = "8:Show Time App"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_00865985CF984086B5CCD21B9388224D"
+            "Folder" = "8:_00865985CF984086B5CCD21B9388224D"
+            "WorkingFolder" = "8:_00865985CF984086B5CCD21B9388224D"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
@@ -421,7 +512,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_416D1314B68049DABAD1073D8CC4E3E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -443,7 +535,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_416D1314B68049DABAD1073D8CC4E3E4"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -454,8 +547,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1202"
+                            "Setting" = "3:2"
+                            "Value" = "8:Licencja kondycja i wszystko co chcemy powiedzieć idzie tutaj"
                             "DefaultValue" = "8:#1202"
                             "UsePlugInResources" = "11:TRUE"
                             }

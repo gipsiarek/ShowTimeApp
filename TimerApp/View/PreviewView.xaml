@@ -114,7 +114,9 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="{Binding Path=Ds.Settings.LogoGridColumn}" Grid.Row="{Binding Path=Ds.Settings.LogoGridRow}"
                     Background="{StaticResource myLogo}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15"/>
-                <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
+                <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                         Grid.Column="{Binding Path=Ds.Settings.NonLogoColumn}" 
+                         Grid.Row="1">
                     <StackPanel MaxWidth="2000">
                         <TextBlock   Text="{Binding Path=Ds.MessageForPresenter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                 TextWrapping="Wrap" FontSize="{Binding Path=Ds.Settings.PreviewMessageFontSize}"
@@ -146,6 +148,8 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
+                <TextBlock x:Name="Date" Grid.Row="0" HorizontalAlignment="{Binding Path=Ds.Settings.NonLogoSite}" VerticalAlignment="Bottom"
+                           Text="{Binding Path=Today}" Foreground="{Binding Path=MessageTextColor}" FontSize="20"/>
 
             </Grid>
         </Grid>

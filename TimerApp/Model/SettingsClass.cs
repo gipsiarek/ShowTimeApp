@@ -36,7 +36,7 @@ namespace TimerApp.Model
             previewMessageColor = Settings.Default.PreviewMessageColor;
             previewAlertTime = Settings.Default.PreviewAlertTime;
             previewAlertType = setAlertType(Settings.Default.PreviewAlertType);
-            
+
             previewLogoPosition = setLogoPosition(Settings.Default.PreviewLogoPosition);
             previewTimeFontSize = Settings.Default.PreviewTimeFontSize;
             previewMessageFontSize = Settings.Default.PreviewMessageFontSize;
@@ -151,7 +151,7 @@ namespace TimerApp.Model
 
         public int LogoHeight
         {
-            get{return logoHeight;}
+            get { return logoHeight; }
             set
             {
                 logoHeight = value;
@@ -161,7 +161,7 @@ namespace TimerApp.Model
 
         public int LogoWidth
         {
-            get{return logoWidth;}
+            get { return logoWidth; }
             set
             {
                 logoWidth = value;
@@ -225,6 +225,8 @@ namespace TimerApp.Model
                 return previewLogoPosition == PreviewLogoPositionEnum.Left_Bottom || previewLogoPosition == PreviewLogoPositionEnum.Left_Top ? 0 : 1;
             }
         }
+        public int NonLogoColumn { get { return LogoGridColumn == 1 ? 0 : 1; } }
+        public string NonLogoSite { get { return LogoGridColumn == 1 ? "Left" : "Rigth"; } }
 
         public int LogoGridRow
         {

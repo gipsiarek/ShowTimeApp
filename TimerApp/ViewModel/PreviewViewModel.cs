@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Media;
 using System.Xml.Serialization;
 using TimerApp.Command;
@@ -81,5 +82,7 @@ namespace TimerApp.ViewModel
                 OnPropertyChanged(() => MessageFontSize);
             }
         }
+
+        public string Today { get { return DateTime.Now.Date.ToString("dd.MM.yyyy");} }
     }
 }

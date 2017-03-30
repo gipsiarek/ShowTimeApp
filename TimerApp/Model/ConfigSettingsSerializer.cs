@@ -76,9 +76,9 @@ namespace TimerApp.Model
                     } 
                     Settings = tmp.Settings;
                 }
-            } catch(Exception ex)
+            } catch(FileNotFoundException)
             {
-
+                
             }
         }
     }

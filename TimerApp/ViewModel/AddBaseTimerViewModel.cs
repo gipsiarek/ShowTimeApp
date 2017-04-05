@@ -18,6 +18,13 @@ namespace TimerApp.ViewModel
         {
             this.ds = ds;
             newBt = bt;
+            if (bt != null)
+            {
+                var t = new TimeSpan(0, 0, (int)bt.Duration);
+                DurationHours = t.Hours;
+                DurationMinutes = t.Minutes;
+                DurationSeconds = t.Seconds;
+            }
         }
 
         public TimerRow NewBt
@@ -43,5 +50,46 @@ namespace TimerApp.ViewModel
                 return addNewPlayListItemCmd;
             }
         }
+
+        public int DurationHours
+        {
+            get { return durationHours; }
+
+            set
+            {
+                durationHours = value;
+                OnPropertyChanged(() => DurationHours);
+                NewBt.Duration = DurationHours * 3600 + DurationMinutes * 60 + DurationSeconds;
+            }
+        }
+
+        public int DurationMinutes
+        {
+            get { return durationMinutes; }
+
+            set
+            {
+                durationMinutes = value;
+                OnPropertyChanged(() => DurationMinutes);
+                NewBt.Duration = DurationHours * 3600 + DurationMinutes * 60 + DurationSeconds;
+            }
+        }
+
+
+        public int DurationSeconds
+        {
+            get { return durationSeconds; }
+
+            set
+            {
+                durationSeconds = value;
+                OnPropertyChanged(() => DurationSeconds);
+                NewBt.Duration = DurationHours * 3600 + DurationMinutes * 60 + DurationSeconds;
+            }
+        }
+
+        int durationHours;
+        int durationMinutes;
+        int durationSeconds;
     }
 }

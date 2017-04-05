@@ -164,13 +164,15 @@ namespace TimerApp.Model
 
         public void Stop()
         {
-            timer.Stop();
-            timer.IsEnabled = false;
-            IsBackgroundAlertFile = IsBackgroundBlinking = IsForegroundBlinking = alertStarted = false;            
-            timerRow.State = ActionEnum.Stoped;
-            timerRow.RemainingSeconds = timerRow.Duration;
-            timerRow.SecondsPassed = 0;
-
+            if (timer != null)
+            {
+                timer.Stop();
+                timer.IsEnabled = false;
+                IsBackgroundAlertFile = IsBackgroundBlinking = IsForegroundBlinking = alertStarted = false;
+                timerRow.State = ActionEnum.Stoped;
+                timerRow.RemainingSeconds = timerRow.Duration;
+                timerRow.SecondsPassed = 0;
+            }
             
           //  TimerDisplay = timerRow.IsTimerDescending ? DisplayTime(timerRow.RemainingSeconds) : DisplayTime(0);
         }

@@ -21,7 +21,7 @@
         <VisualBrush x:Key="myLogo">
             <VisualBrush.Visual>
                 <Grid>
-                    <Image Source="{Binding Path=Ds.Settings.LogoPreviewFile}" Stretch="Fill"/>
+                    <Image Source="{Binding Path=Ds.Settings.LogoPreviewFile}" Stretch="Uniform"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -47,7 +47,8 @@
     </UserControl.Resources>
 
 
-    <Grid x:Name="grid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+    <Grid x:Name="grid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{Binding PreviewBackgroundColor}">
+
         <Grid x:Name="previewGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <Grid.Style>
                 <Style TargetType="{x:Type Grid}">
@@ -61,7 +62,7 @@
                                 <StopStoryboard BeginStoryboardName="bgFlash"/>
                             </DataTrigger.ExitActions>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Ds.Timer.IsBackgroundAlertFilem, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                        <DataTrigger Binding="{Binding Ds.Timer.IsBackgroundAlertFile, UpdateSourceTrigger=PropertyChanged}" Value="True">
                             <Setter Property="Background" Value="{DynamicResource alertBackground}"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -113,8 +114,12 @@
                     </ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="{Binding Path=Ds.Settings.LogoGridColumn}" Grid.Row="{Binding Path=Ds.Settings.LogoGridRow}"
-                    Background="{StaticResource myLogo}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15"/>
-                <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <Viewbox Stretch="Uniform" >
+                        <Image Source="{Binding Path=Ds.Settings.LogoPreviewFile}" />
+                    </Viewbox>
+                </Grid>
+                <!--<Viewbox StretchDirection="DownOnly" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                          Grid.Column="{Binding Path=Ds.Settings.NonLogoColumn}" 
                          Grid.Row="1">
                     <StackPanel MaxWidth="2000">
@@ -123,34 +128,53 @@
                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                Foreground="{Binding Path=PreviewMessageColor }"/>
                     </StackPanel>
-                </Viewbox>
+                </Viewbox>-->
             </Grid>
         </Grid>
         <Grid x:Name="previesafasfwGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid>
-                <TextBlock  x:Name="TimerDisplay"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    FontSize="{Binding Path=Ds.Settings.PreviewTimeFontSize}" 
-                    Foreground="{Binding Path=PreviewTextColor }"
-                    Text="{Binding Ds.Timer.TimerDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Ds.Timer.IsForegroundBlinking, UpdateSourceTrigger=PropertyChanged}" Value="True">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                    <DataTrigger.EnterActions>
-                                        <BeginStoryboard Name="fgFlash" Storyboard="{StaticResource flashAnimation}" />
-                                    </DataTrigger.EnterActions>
-                                    <DataTrigger.ExitActions>
-                                        <StopStoryboard BeginStoryboardName="fgFlash"/>
-                                    </DataTrigger.ExitActions>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-                <TextBlock x:Name="Date" Grid.Row="0" HorizontalAlignment="{Binding Path=Ds.Settings.NonLogoSite}" VerticalAlignment="Bottom"
-                           Text="{Binding Path=Today}" Foreground="{Binding Path=MessageTextColor}" FontSize="20"/>
+                    <DockPanel LastChildFill="False" VerticalAlignment="Center" >
 
+                        <TextBlock  x:Name="TimerDisplay"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            DockPanel.Dock="Top"
+                            FontSize="{Binding Path=Ds.Settings.PreviewTimeFontSize}" 
+                            Foreground="{Binding Path=PreviewTextColor }"
+                            Text="{Binding Ds.Timer.TimerDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Ds.Timer.IsForegroundBlinking, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard Name="fgFlash" Storyboard="{StaticResource flashAnimation}" />
+                                            </DataTrigger.EnterActions>
+                                            <DataTrigger.ExitActions>
+                                                <StopStoryboard BeginStoryboardName="fgFlash"/>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"                     
+                     >
+                        <StackPanel MaxWidth="2000">
+                            <TextBlock   Text="{Binding Path=Ds.MessageForPresenter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                TextWrapping="Wrap" FontSize="{Binding Path=Ds.Settings.PreviewMessageFontSize}"
+                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                               Foreground="{Binding Path=PreviewMessageColor }"/>
+                        </StackPanel>
+                    </Viewbox>
+
+
+                </DockPanel>
+                <TextBlock x:Name="Date" Grid.Row="0" HorizontalAlignment="{Binding Path=Ds.Settings.NonLogoSite}" VerticalAlignment="Bottom"
+                           DockPanel.Dock="Bottom"
+                           Text="{Binding Path=Today, StringFormat=Dziś: {0}}"  Foreground="{Binding Path=MessageTextColor}" FontSize="20">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="White" RenderingBias="Quality" Direction="0" ShadowDepth="0" BlurRadius="7"/>
+                    </TextBlock.Effect>
+                </TextBlock>
             </Grid>
         </Grid>
     </Grid>
@@ -158,7 +182,9 @@
 
 <!--<Grid x:Name="grid" >
 
-    --><!--Background="{StaticResource myBrush}"--><!--
+    -->
+<!--Background="{StaticResource myBrush}"-->
+<!--
     <Grid.RowDefinitions>
         <RowDefinition Height="auto"/>
         <RowDefinition Height="0.8*"/>

@@ -19,13 +19,20 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Nazwa" Margin="5,5"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Nazwa"/>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding NewBt.Name}" MinWidth="100" Margin="5,5"/>
         <Label Grid.Row="1" Grid.Column="0" Content="Czas [s]"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NewBt.Duration}" MinWidth="100" Margin="5,5"/>
+        <!--<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NewBt.Duration}" MinWidth="100" Margin="5,5"/>-->
+        <DockPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  Margin="5,5">
+            <TextBox x:Name="Hours" Text="{Binding Path=DurationHours}" MinWidth="30" />
+            <TextBlock Text=":"/>
+            <TextBox x:Name="Minutes" Text="{Binding Path=DurationMinutes}" MinWidth="30"/>
+            <TextBlock Text=":"/>
+            <TextBox x:Name="Seconds" Text="{Binding Path=DurationSeconds}" MinWidth="30"/>
+        </DockPanel>
         <Label Grid.Row="2" Grid.Column="0" Content="Uwagi"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NewBt.Comments}" MinWidth="100" Margin="5,5"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Odliczanie do 0" Margin="5,5"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Odliczanie do 0"/>
         <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding NewBt.IsTimerDescending}" Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Grid.Row="4" Grid.Column="0" Content="Czy uruchamiać alarm"/>
         <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding NewBt.ShouldAlertFire}" Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center"/>

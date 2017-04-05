@@ -18,7 +18,7 @@ namespace TimerApp.Model
         bool isTimerDescending;
         bool shouldAlertFire;
 
-        public TimerRow(string name, long duration, string comments, bool isTimerDescending=true, bool shouldAlertFire =true)
+        public TimerRow(string name, long duration, string comments, bool isTimerDescending = true, bool shouldAlertFire = true)
         {
             this.name = name;
             this.duration = duration;
@@ -33,53 +33,55 @@ namespace TimerApp.Model
         public TimerRow()
         {
             state = ActionEnum.Stoped;
+            IsTimerDescending = true;
+            ShouldAlertFire = true;
         }
 
         [XmlIgnore]
         public ActionEnum State
         {
-            get{return state;}
+            get { return state; }
             set
             {
                 state = value;
-                OnPropertyChanged(() =>State);
+                OnPropertyChanged(() => State);
             }
         }
 
         public string Name
         {
-            get{return name;}
+            get { return name; }
             set
             {
                 name = value;
-                OnPropertyChanged(() =>Name);
+                OnPropertyChanged(() => Name);
             }
         }
 
         public long Duration
         {
-            get{return duration;}
+            get { return duration; }
             set
             {
                 duration = value;
-                OnPropertyChanged(() =>Duration);
+                OnPropertyChanged(() => Duration);
             }
         }
 
         public string Comments
         {
-            get{return comments;}
+            get { return comments; }
             set
             {
                 comments = value;
-                OnPropertyChanged(() =>Comments);
+                OnPropertyChanged(() => Comments);
             }
         }
 
         [XmlIgnore]
         public long RemainingSeconds
         {
-            get{return remainingSeconds;}
+            get { return remainingSeconds; }
             set
             {
                 remainingSeconds = value;
@@ -89,10 +91,10 @@ namespace TimerApp.Model
 
         public bool IsTimerDescending
         {
-            get{return isTimerDescending;}
+            get { return isTimerDescending; }
             set
             {
-                isTimerDescending= value;
+                isTimerDescending = value;
                 OnPropertyChanged(() => IsTimerDescending);
             }
         }
@@ -100,7 +102,7 @@ namespace TimerApp.Model
         [XmlIgnore]
         public long SecondsPassed
         {
-            get{return secondsPassed;}
+            get { return secondsPassed; }
             set
             {
                 secondsPassed = value;
@@ -118,16 +120,17 @@ namespace TimerApp.Model
             }
         }
 
-        public string DurationDisplay 
+        public string DurationDisplay
         {
             get
             {
-                if(Duration>=3600)
+                if (Duration >= 3600)
                     return TimeSpan.FromSeconds(Duration).ToString(@"hh\:mm\:ss");
                 else
                     return TimeSpan.FromSeconds(Duration).ToString(@"mm\:ss");
             }
         }
+
 
         public bool IsRunning()
         {

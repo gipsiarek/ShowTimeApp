@@ -52,7 +52,7 @@ namespace TimerApp.Model
 
         public void SaveConfigFile()
         {
-            using (Stream stream = File.Open("ConfigSetings.xml", FileMode.Create))
+            using (Stream stream = File.Open("ConfigSetings.e4e", FileMode.Create))
             {
                 //BinaryFormatter bin = new BinaryFormatter();
                 XmlSerializer bin = new XmlSerializer(typeof(ConfigSettingsSerializer));
@@ -65,7 +65,7 @@ namespace TimerApp.Model
         {
             try
             {
-                using (Stream stream = File.Open("ConfigSetings.xml", FileMode.Open))
+                using (Stream stream = File.Open("ConfigSetings.e4e", FileMode.Open))
                 {
                     XmlSerializer bin = new XmlSerializer(typeof(ConfigSettingsSerializer));
                     var tmp = (ConfigSettingsSerializer)bin.Deserialize(stream);

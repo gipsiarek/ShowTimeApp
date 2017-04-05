@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TimerApp.exe" size="2466816">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TimerApp.exe" size="2468864">
       <assemblyIdentity name="TimerApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>xd7IzZogCvqoDNOD/QrwlfOWIRyqDLfogkEx32IxDTY=</dsig:DigestValue>
+        <dsig:DigestValue>vOnur4UFWRR+Uzowr6SbcBN14nwMmyQRrzcr3Ydu2XQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

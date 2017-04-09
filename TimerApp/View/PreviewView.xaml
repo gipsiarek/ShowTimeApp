@@ -37,7 +37,7 @@
             <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" AutoReverse="True" Duration="0:0:0.5" RepeatBehavior="Forever" />
         </Storyboard>
         <Storyboard x:Key="bgAnimation" >
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.4" AutoReverse="True" Duration="0:0:0.5" RepeatBehavior="Forever" />
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.2" AutoReverse="True" Duration="0:0:0.5" RepeatBehavior="Forever" />
         </Storyboard>
 
         <Converter:HorizontalPosConverter x:Key="HorizontalPosConverter" />
@@ -132,171 +132,124 @@
             </Grid>
         </Grid>
         <Grid x:Name="previesafasfwGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid>
-                    <DockPanel LastChildFill="False" VerticalAlignment="Center" >
-
-                        <TextBlock  x:Name="TimerDisplay"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-                            DockPanel.Dock="Top"
+            <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="col00">
+                        <ColumnDefinition.Width>
+                            <MultiBinding UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource WidthConverter}" >
+                                <Binding ElementName="previewGrid" />
+                                <Binding Path="Ds.Settings" />
+                                <Binding ElementName="col00"/>
+                            </MultiBinding>
+                        </ColumnDefinition.Width>
+                    </ColumnDefinition>
+                    <ColumnDefinition x:Name="col11">
+                        <ColumnDefinition.Width>
+                            <MultiBinding UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource WidthConverter}" >
+                                <Binding ElementName="previewGrid" />
+                                <Binding Path="Ds.Settings" />
+                                <Binding ElementName="col11"/>
+                            </MultiBinding>
+                        </ColumnDefinition.Width>
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Viewbox Grid.RowSpan="2" Grid.ColumnSpan="2" StretchDirection="DownOnly"> 
+                <TextBlock  x:Name="TimerDisplay"   HorizontalAlignment="Center" VerticalAlignment="Center"
                             FontSize="{Binding Path=Ds.Settings.PreviewTimeFontSize}" 
                             Foreground="{Binding Path=PreviewTextColor }"
                             Text="{Binding Ds.Timer.TimerDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Ds.Timer.IsForegroundBlinking, UpdateSourceTrigger=PropertyChanged}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                            <DataTrigger.EnterActions>
-                                                <BeginStoryboard Name="fgFlash" Storyboard="{StaticResource flashAnimation}" />
-                                            </DataTrigger.EnterActions>
-                                            <DataTrigger.ExitActions>
-                                                <StopStoryboard BeginStoryboardName="fgFlash"/>
-                                            </DataTrigger.ExitActions>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"                     
-                     >
-                        <StackPanel MaxWidth="2000">
-                            <TextBlock   Text="{Binding Path=Ds.MessageForPresenter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                TextWrapping="Wrap" FontSize="{Binding Path=Ds.Settings.PreviewMessageFontSize}"
-                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                               Foreground="{Binding Path=PreviewMessageColor }"/>
-                        </StackPanel>
-                    </Viewbox>
-
-
-                </DockPanel>
-                <TextBlock x:Name="Date" Grid.Row="0" HorizontalAlignment="{Binding Path=Ds.Settings.NonLogoSite}" VerticalAlignment="Bottom"
-                           DockPanel.Dock="Bottom"
-                           Text="{Binding Path=Today, StringFormat=Dziś: {0}}"  Foreground="{Binding Path=MessageTextColor}" FontSize="20">
-                    <TextBlock.Effect>
-                        <DropShadowEffect Color="White" RenderingBias="Quality" Direction="0" ShadowDepth="0" BlurRadius="7"/>
-                    </TextBlock.Effect>
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Ds.Timer.IsForegroundBlinking, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Name="fgFlash" Storyboard="{StaticResource flashAnimation}" />
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="fgFlash"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
                 </TextBlock>
+                </Viewbox>
+                
+                <Viewbox Grid.Row="1" Grid.ColumnSpan="{Binding Path=Ds.Settings.ColspanForMessage}"
+                         Grid.Column="{Binding Path=Ds.Settings.MessageColumn}"       
+                         StretchDirection="DownOnly">
+                <TextBlock   x:Name="messageDisplay" 
+                    Text="{Binding Path=Ds.MessageForPresenter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                TextWrapping="Wrap" FontSize="{Binding Path=Ds.Settings.PreviewMessageFontSize}"
+                             HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                               Foreground="{Binding Path=PreviewMessageColor }"/>
+                </Viewbox>
+
+
             </Grid>
+            <TextBlock x:Name="Date" Grid.Row="0" HorizontalAlignment="{Binding Path=Ds.Settings.NonLogoSite}" VerticalAlignment="Bottom"
+                           Text="{Binding Path=Today, StringFormat=Dziś: {0}}"  Foreground="{Binding Path=MessageTextColor}" FontSize="24" Margin="5">
+                
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Yellow" RenderingBias="Quality" Direction="0" ShadowDepth="0" BlurRadius="7"/>
+                </TextBlock.Effect>
+            </TextBlock>
         </Grid>
     </Grid>
 </UserControl>
 
-<!--<Grid x:Name="grid" >
-
-    -->
-<!--Background="{StaticResource myBrush}"-->
-<!--
-    <Grid.RowDefinitions>
-        <RowDefinition Height="auto"/>
-        <RowDefinition Height="0.8*"/>
-    </Grid.RowDefinitions>
-
-    <Grid Grid.Row="0" Margin="0">
 
 
-    </Grid>
+<!--FRAGMENT KODU KTÓRY DZIAŁA DOBRZE W PREZENTERZE -  w podglądzie małe problemy-->
 
-    <Grid Grid.Row="1" x:Name="previewGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-        <Grid.Style>
-            <Style TargetType="{x:Type Grid}">
-                <Setter Property="Background" Value="{DynamicResource previewBackground}"/>
-                <Style.Triggers>
-                    <DataTrigger  Binding="{Binding Ds.Timer.IsBackgroundBlinking}" Value="True">
-                        <DataTrigger.EnterActions>
-                            <BeginStoryboard Name="bgFlash" Storyboard="{StaticResource bgAnimation}" />
-                        </DataTrigger.EnterActions>
-                        <DataTrigger.ExitActions>
-                            <StopStoryboard BeginStoryboardName="bgFlash"/>
-                        </DataTrigger.ExitActions>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Ds.Timer.IsBackgroundAlertFile}" Value="True">
-                        <Setter Property="Background" Value="{DynamicResource alertBackground}"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Style>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition x:Name="row0" >
-                    <RowDefinition.Height>
-                        <MultiBinding UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource HeightConverter}" >
-                            <Binding ElementName="previewGrid" />
-                            <Binding Path="Ds.Settings" />
-                            <Binding ElementName="row0"/>
-                        </MultiBinding>
-                    </RowDefinition.Height>
-                </RowDefinition>
-                <RowDefinition x:Name="row1" >
-                    <RowDefinition.Height>
-                        <MultiBinding UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource HeightConverter}" >
-                            <Binding ElementName="previewGrid" />
-                            <Binding Path="Ds.Settings" />
-                            <Binding ElementName="row1"/>
-                        </MultiBinding>
-                    </RowDefinition.Height>
-                </RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="col0">
-                    <ColumnDefinition.Width>
-                        <MultiBinding UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource WidthConverter}" >
-                            <Binding ElementName="previewGrid" />
-                            <Binding Path="Ds.Settings" />
-                            <Binding ElementName="col0"/>
-                        </MultiBinding>
-                    </ColumnDefinition.Width>
-                </ColumnDefinition>
-                <ColumnDefinition x:Name="col1">
-                    <ColumnDefinition.Width>
-                        <MultiBinding UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource WidthConverter}" >
-                            <Binding ElementName="previewGrid" />
-                            <Binding Path="Ds.Settings" />
-                            <Binding ElementName="col1"/>
-                        </MultiBinding>
-                    </ColumnDefinition.Width>
-                </ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="{Binding Path=Ds.Settings.LogoGridColumn}" Grid.Row="{Binding Path=Ds.Settings.LogoGridRow}"
-                    Background="{StaticResource myLogo}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15"/>
-        </Grid>
-    </Grid>
-    <Grid Row="1" x:Name="previesafasfwGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock  x:Name="TimerDisplay"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    FontSize="{Binding Path=Ds.Settings.PreviewTimeFontSize}" 
-                    Foreground="{Binding Path=PreviewTextColor }"
-                    Text="{Binding Ds.Timer.TimerDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Ds.Timer.IsForegroundBlinking}" Value="True">
-                                <Setter Property="Visibility" Value="Visible" />
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard Name="fgFlash" Storyboard="{StaticResource flashAnimation}" />
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <StopStoryboard BeginStoryboardName="fgFlash"/>
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <Viewbox Grid.Row="1" StretchDirection="DownOnly">
-                <StackPanel MaxWidth="2000">
-                    <TextBlock   Text="{Binding Path=Ds.MessageForPresenter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+<!--<Grid x:Name="previesafasfwGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid>
+        <DockPanel LastChildFill="False" VerticalAlignment="Center" SnapsToDevicePixels="True" >
+            <Viewbox Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            DockPanel.Dock="Top">
+                <TextBlock  x:Name="TimerDisplay"  Grid.Row="0" 
+                            FontSize="{Binding Path=Ds.Settings.PreviewTimeFontSize}" 
+                            Foreground="{Binding Path=PreviewTextColor }"
+                            Text="{Binding Ds.Timer.TimerDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Ds.Timer.IsForegroundBlinking, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Name="fgFlash" Storyboard="{StaticResource flashAnimation}" />
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="fgFlash"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Viewbox>
+
+            <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                         Height="{Binding Path=Ds.Settings.PreviewMessageFontSize}" DockPanel.Dock="Bottom" >
+                <TextBlock   Text="{Binding Path=Ds.MessageForPresenter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                 TextWrapping="Wrap" FontSize="{Binding Path=Ds.Settings.PreviewMessageFontSize}"
                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                Foreground="{Binding Path=PreviewMessageColor }"/>
-                </StackPanel>
             </Viewbox>
-        </Grid>
+        </DockPanel>
+
+
+        <TextBlock x:Name="Date" Grid.Row="0" HorizontalAlignment="{Binding Path=Ds.Settings.NonLogoSite}" VerticalAlignment="Bottom"
+                           DockPanel.Dock="Bottom"
+                           Text="{Binding Path=Today, StringFormat=Dziś: {0}}"  Foreground="{Binding Path=MessageTextColor}" FontSize="20">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="White" RenderingBias="Quality" Direction="0" ShadowDepth="0" BlurRadius="7"/>
+            </TextBlock.Effect>
+        </TextBlock>
     </Grid>
 </Grid>-->

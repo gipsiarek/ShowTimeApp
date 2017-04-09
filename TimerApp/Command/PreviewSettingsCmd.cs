@@ -43,11 +43,11 @@ namespace TimerApp.Command
                 {
                     if (param == null || param.ToString() != "CANCEL")
                     {
-                        ds.Settings.Save();
-                        ds.Mvm.TimerVm = new PreviewViewModel(ds);
+                        ds.Settings.Save();                        
                         ds.CallCloseDialog(true);
                         ds.Css = new ConfigSettingsSerializer(ds.TimesCollection, ds.Settings);
                         ds.Css.SaveConfigFile();
+                        ds.Mvm.TimerVm = new PreviewViewModel(ds);
                     }
                     else
                     {

@@ -44,6 +44,7 @@ namespace TimerApp.Command
                             ds.Timer.Stop();
                             SettingsWindow settingsWindow = new SettingsWindow();
                             settingsWindow.DataContext = ds.Mvm;
+                            settingsWindow.SizeToContent = SizeToContent.WidthAndHeight;
                             ds.OnRequestClose += (e) =>
                             {
                                 settingsWindow.Close();
@@ -55,6 +56,7 @@ namespace TimerApp.Command
                     {
                         SettingsWindow settingsWindow = new SettingsWindow();
                         settingsWindow.DataContext = ds.Mvm;
+                        settingsWindow.SizeToContent = SizeToContent.WidthAndHeight;
                         ds.OnRequestClose += (e) =>
                         {
                             settingsWindow.Close();

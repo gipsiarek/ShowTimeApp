@@ -28,14 +28,21 @@
         <VisualBrush x:Key="bg">
             <VisualBrush.Visual>
                 <Grid>
-                    <Image Stretch="Fill" Source="Image/mainBg22.jpg"/>
+                    <Image Stretch="Fill" Source="Image/tlo_glownego_okna_programu.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
+        
     </Window.Resources>
     
     <Grid Background="{StaticResource bg}">
-        <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Margin="10,10,0,0" Grid.Row="0" Source="Image/logo_z_napisem_z_boku.png" HorizontalAlignment="Left" Width="200" Height="50"/>
+
+        <Grid Grid.Row="1" Margin="10,0,10,45">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.6*"/>
                 <ColumnDefinition Width="0.4*"/>
@@ -59,9 +66,12 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <DockPanel HorizontalAlignment="Stretch"  Background="CadetBlue" Grid.Row="0" >
-                    <Label Content="PODGLĄD" HorizontalAlignment="Left" FontSize="20" Foreground="White"/>
-                    <Button HorizontalAlignment="Right" Background="CadetBlue" Foreground="White"
+                <DockPanel HorizontalAlignment="Stretch"  Grid.Row="0" >
+                    <DockPanel.Background>
+                        <ImageBrush ImageSource="Image/pasek_podglad.png" />
+                    </DockPanel.Background>
+                    
+                    <Button HorizontalAlignment="Right" Background="Transparent" Foreground="White" DockPanel.Dock="Right"
                         Margin="0,2,10,2" BorderThickness="1" BorderBrush="White" Width="150"  FontSize="18"
                         Command="{Binding PreviewSettingsViewCmd}">
                         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="110">

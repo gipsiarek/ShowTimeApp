@@ -126,6 +126,11 @@ namespace TimerApp.Model
             {
                 previewLogoPosition = value;
                 OnPropertyChanged(() => PreviewLogoPosition);
+                OnPropertyChanged(() => LogoGridRow);
+                OnPropertyChanged(() => LogoGridColumn);
+                OnPropertyChanged(() => ColspanForMessage);
+                OnPropertyChanged(() => NonLogoSite);
+                OnPropertyChanged(() => NonLogoColumn);
             }
         }
 
@@ -227,7 +232,7 @@ namespace TimerApp.Model
         }
         public int NonLogoColumn { get { return LogoGridColumn == 1 ? 0 : 1; } }
         public string NonLogoSite { get { return LogoGridColumn == 1 ? "Left" : "Rigth"; } }
-
+        
         public int LogoGridRow
         {
             get
@@ -235,8 +240,11 @@ namespace TimerApp.Model
                 return previewLogoPosition == PreviewLogoPositionEnum.Right_Top || previewLogoPosition == PreviewLogoPositionEnum.Left_Top ? 0 : 1;
             }
         }
-    }
 
+        public int ColspanForMessage { get { return LogoGridRow == 0 ? 2 : 1; } }
+        public int MessageColumn { get { return ColspanForMessage == 2 ? 0 : NonLogoColumn; } }
+    }
+        
     public enum PreviewLogoPositionEnum
     {
         Left_Top = 1,

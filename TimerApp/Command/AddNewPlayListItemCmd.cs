@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TimerApp.Model;
 using TimerApp.Model.Abstract;
 using TimerApp.ViewModel;
@@ -23,15 +24,7 @@ namespace TimerApp.Command
             {
                 return (param) =>
                 {
-                    if (param != null && param is TimerRow)
-                    {
-                        var tmpParam = (TimerRow)param;
-                        return tmpParam != null
-                                && !string.IsNullOrEmpty(tmpParam.Name) && tmpParam.Duration != 0;
-                    }else
-                    {
-                        return param!=null && param.ToString() == "CANCEL";
-                    }
+                    return true;
                     
                 };
             }
@@ -43,21 +36,35 @@ namespace TimerApp.Command
             {
                 return (param) =>
                 {
+                    bool was_error = false;
                     if (param != null && param is TimerRow)
                     {
-                        var btTmp = (TimerRow)param;
-                        if (!ds.TimesCollection.Contains(btTmp))
-                            ds.TimesCollection.Add(btTmp);
-                        ds.TimesCollection = new System.Collections.ObjectModel.ObservableCollection<TimerRow>(ds.TimesCollection);
-                        ds.CallCloseDialog(true);
-                        ds.Css = new ConfigSettingsSerializer(ds.TimesCollection, ds.Settings);
-                        ds.Css.SaveConfigFile();
-                    }else
-                    {
-                        ds.CallCloseDialog(false);
+                        var tmpParam = (TimerRow)param;
+                        if ((tmpParam != null && !string.IsNullOrEmpty(tmpParam.Name) && tmpParam.Duration != 0) == false)
+                        {
+                            MessageBox.Show("Proszę uzupełnić nazwę i czas");
+                            was_error = true;
+                        }
                     }
-                    ds.Mvm.PlayListCtr = new PlayListViewModel(ds);
-                    
+
+                    if (!was_error)
+                    {
+                        if (param != null && param is TimerRow)
+                        {
+                            var btTmp = (TimerRow)param;
+                            if (!ds.TimesCollection.Contains(btTmp))
+                                ds.TimesCollection.Add(btTmp);
+                            ds.TimesCollection = new System.Collections.ObjectModel.ObservableCollection<TimerRow>(ds.TimesCollection);
+                            ds.CallCloseDialog(true);
+                            ds.Css = new ConfigSettingsSerializer(ds.TimesCollection, ds.Settings);
+                            ds.Css.SaveConfigFile();
+                        }
+                        else
+                        {
+                            ds.CallCloseDialog(false);
+                        }
+                        ds.Mvm.PlayListCtr = new PlayListViewModel(ds);
+                    }
                 };
             }
         }

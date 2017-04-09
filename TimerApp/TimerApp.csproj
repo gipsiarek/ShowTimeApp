@@ -69,7 +69,13 @@
     </Win32Resource>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ShowTIme.ico</ApplicationIcon>
+    <ApplicationIcon>ShowTimeApp1.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ShowTimeAppCertificate.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="InstallManager, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -129,6 +135,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\DownToZeroCmd.cs" />
+    <Compile Include="Command\FireAlertCmd.cs" />
     <Compile Include="Command\GetBgImageFileCmd.cs" />
     <Compile Include="Command\PreviewSettingsCmd.cs" />
     <Compile Include="Command\AddNewPlayListItemCmd.cs" />
@@ -257,32 +265,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="ShowTimeAppCertificate.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\delete.png" />
-    <Resource Include="Image\down.png" />
-    <Resource Include="Image\edit.png" />
-    <Resource Include="Image\pause.png" />
-    <Resource Include="Image\play.png" />
-    <Resource Include="Image\stop.png" />
-    <Resource Include="Image\up.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\mainBg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\mainBg2.jpg" />
-    <Resource Include="Image\mainBg3.jpg" />
-    <Resource Include="Image\mainBg4.jpg" />
-    <Resource Include="Image\mainBg5.jpg" />
-    <Resource Include="Image\mainBg6.jpg" />
-    <Resource Include="Image\mainBg7.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\mainBg22.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -297,10 +283,33 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ShowTIme.ico" />
+    <Resource Include="Image\play.png" />
+    <Resource Include="Image\ShowTimeApp1.ico" />
+    <Resource Include="Image\stop.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\ShowTIme.ico" />
+    <Resource Include="Image\checkbox_lista_czasow.png" />
+    <Resource Include="Image\checkbox_podglad.png" />
+    <Resource Include="Image\checkbox_wiadomosc.png" />
+    <Resource Include="Image\ikona_ustawienia.png" />
+    <Resource Include="Image\ikona_wyczysc.png" />
+    <Resource Include="Image\ikona_wyslij.png" />
+    <Resource Include="Image\kosz.png" />
+    <Resource Include="Image\logo_z_napisem_na_dole.png" />
+    <Resource Include="Image\logo_z_napisem_z_boku.png" />
+    <Resource Include="Image\olowek.png" />
+    <Resource Include="Image\pasek_lista_czasow.png" />
+    <Resource Include="Image\pasek_podglad.png" />
+    <Resource Include="Image\pasek_wiadomosc.png" />
+    <Resource Include="Image\pauza.png" />
+    <Resource Include="Image\pusty_znaczek.png" />
+    <Resource Include="Image\tlo_glownego_okna_programu.png" />
+    <Resource Include="Image\tlo_ustawien_dodawaniaczasu_instalatora.png" />
+    <Resource Include="Image\zaznzaczenie.png" />
+    <Resource Include="Image\zielony_znaczek.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ShowTimeApp1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -51,6 +51,28 @@ namespace TimerApp.ViewModel
             }
         }
 
+        private FireAlertCmd fireAlertCmd;
+        public FireAlertCmd FireAlertCmd
+        {
+            get
+            {
+                if (fireAlertCmd == null)
+                    fireAlertCmd = new FireAlertCmd(ds, this);
+                return fireAlertCmd;
+            }
+        }
+        
+
+        private DownToZeroCmd downToZeroCmd;
+        public DownToZeroCmd DownToZeroCmd
+        {
+            get
+            {
+                if (downToZeroCmd == null)
+                    downToZeroCmd = new DownToZeroCmd(ds, this);
+                return downToZeroCmd;
+            }
+        }
         public int DurationHours
         {
             get { return durationHours; }
